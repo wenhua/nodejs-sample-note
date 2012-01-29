@@ -43,13 +43,23 @@ app.get('/', function(req, res){
         msgs: msgs
     })
 });
+app.post('/delete', function(req, res){
+    var id = req.body.id;
+    for(var i=0, item; item = db[i++];){
+        if(item.id === id){
+            db.splice(i-1, 1);
+            break;
+        }
+    }
+    res.send(200);
+});
 app.post('/save', function(req,res){
     var content = req.body.content;
     var id = connect.utils.md5(new Date().getTime().toString());
     if(req.body.id){
         for(var i=0, item; item = db[i++];){
             if(item.id === req.body.id){
-                db[i-1] = {id: id, content: req.body.content};
+                db[i-1] = {id: id, content: content};
                 break;
             }
         }
