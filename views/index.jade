@@ -1,0 +1,11 @@
+h1 nodejs coffeescript express jade stylus 留言板
+textarea#msg(name="msg-input", cols="50", rows="8")
+p
+    input#save-msg(type="button", value="保存")
+ul#msg-list
+    - each content, key in msgs
+        li.msg-item(id= key)
+            p= content
+            input.update(type="button", value="修改")
+            input.delete(type="button", value="删除")
+
